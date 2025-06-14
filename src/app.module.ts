@@ -1,27 +1,30 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
 import * as process from 'node:process';
-const dotenv = require('dotenv')
-
-dotenv.config();
+import { User } from './users/users.model';
 
 
 @Module({
-    controllers: [AppController],
-    providers: [AppService],
+    controllers: [],
+    providers: [],
     imports: [
+        ConfigModule.forRoot({
+            envFilePath: `.${process.env.NODE_ENV}.env`,
+        }),
         SequelizeModule.forRoot({
             dialect: 'postgres',
-            host: 'localhost',
+            host: process.env.DB_HOST,
             port: Number(process.env.DB_PORT) || 5432,
             username: process.env.DB_USER,
             password: process.env.DB_PASSWD,
-            database: 'ts-and-nest',
-            models: [],
-            autoLoadModels: true
+            database: process.env.DB_NAME,
+            models: [User],
+            autoLoadModels: true,
+            // logging: console.log
         }),
+        UsersModule,
     ]
 })
 export class AppModule {

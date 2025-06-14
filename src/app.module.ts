@@ -1,14 +1,21 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import * as process from 'node:process';
+
+import { UsersModule } from './users/users.module';
 import { User } from './users/users.model';
+
+import { RolesService } from './roles/roles.service';
+import { RolesController } from './roles/roles.controller';
+import { RolesModule } from './roles/roles.module';
+import { Role } from './roles/roles.model';
+import { UserRoles } from './roles/user-roles.model';
 
 
 @Module({
-    controllers: [],
-    providers: [],
+    controllers: [RolesController],
+    providers: [RolesService],
     imports: [
         ConfigModule.forRoot({
             envFilePath: `.${process.env.NODE_ENV}.env`,
@@ -20,11 +27,12 @@ import { User } from './users/users.model';
             username: process.env.DB_USER,
             password: process.env.DB_PASSWD,
             database: process.env.DB_NAME,
-            models: [User],
+            models: [User, Role, UserRoles],
             autoLoadModels: true,
-            // logging: console.log
+            logging: console.log
         }),
         UsersModule,
+        RolesModule,
     ]
 })
 export class AppModule {

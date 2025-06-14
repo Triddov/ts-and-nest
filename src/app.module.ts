@@ -6,16 +6,15 @@ import * as process from 'node:process';
 import { UsersModule } from './users/users.module';
 import { User } from './users/users.model';
 
-import { RolesService } from './roles/roles.service';
-import { RolesController } from './roles/roles.controller';
 import { RolesModule } from './roles/roles.module';
 import { Role } from './roles/roles.model';
 import { UserRoles } from './roles/user-roles.model';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
-    controllers: [RolesController],
-    providers: [RolesService],
+    controllers: [],
+    providers: [],
     imports: [
         ConfigModule.forRoot({
             envFilePath: `.${process.env.NODE_ENV}.env`,
@@ -33,6 +32,7 @@ import { UserRoles } from './roles/user-roles.model';
         }),
         UsersModule,
         RolesModule,
+        AuthModule,
     ]
 })
 export class AppModule {

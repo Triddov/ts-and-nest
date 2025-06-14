@@ -1,5 +1,6 @@
-приложение на ts / nest
-swagger
-postgres
+авторизация
 docker + docker-compose
-раздельные .env
+
+
+флаг логирования должен зависеть от режима
+

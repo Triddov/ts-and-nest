@@ -8,7 +8,7 @@ async function start(){
 
     const PORT = process.env.APP_PORT || 80;
     const app = await NestFactory.create(AppModule);
-    // app.useGlobalPipes(new ValidationPipe());
+    app.useGlobalPipes(new ValidationPipe());
 
     const config = new DocumentBuilder()
         .setTitle('nestjs experience')

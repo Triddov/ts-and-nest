@@ -39,7 +39,7 @@ import { FilesModule } from './files/files.module';
             database: process.env.DB_NAME,
             models: [User, Role, UserRoles, Post],
             autoLoadModels: true,
-            logging: console.log
+            logging: process.env.NODE_ENV === 'dev' ? console.log : false,
         }),
         UsersModule,
         RolesModule,

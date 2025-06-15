@@ -9,6 +9,7 @@
 
     "start": "cross-env NODE_ENV=prod nest start",
     "start:dev": "cross-env NODE_ENV=dev nest start --watch",
+    "start:dev-docker": "cross-env NODE_ENV=dev-docker nest start --watch",
     "start:debug": "cross-env NODE_ENV=dev nest start --debug --watch",
     "start:prod": "node dist/main",
 
